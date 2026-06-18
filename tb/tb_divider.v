@@ -28,7 +28,7 @@ module tb_divider;
     );
 
     // --- CLOCK GENERATOR ---
-    always #25 clk = ~clk; // 10ns period
+    always #25 clk = ~clk; // 50ns period
 
     initial begin
         // Setup Waveform Generation

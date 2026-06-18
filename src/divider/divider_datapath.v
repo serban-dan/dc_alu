@@ -39,7 +39,7 @@ module divider_datapath (
     );
 
     //2. Register Q (Dividend / Quotient)
-    // If setting the quotient bit, feed Q its own data shifted left, but replace bit 0.
+    // After the left shift, only the new quotient bit should be written into Q[0].
     wire [7:0] Q_input = set_q0 ? {Q_out[7:1], ~A_out[7]} : data_in;
 
     shift_register_8bit reg_Q (

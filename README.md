@@ -15,7 +15,6 @@ The combinational ALU supports:
 5. XOR  
 6. Logical Shift Left (LSL)  
 7. Logical Shift Right (LSR)  
-8. Pass A
 
 The sequential execution units support:
 
@@ -30,14 +29,18 @@ The sequential execution units support:
 
 ## **Top-Level ALU Interface**
 
-**Top module:** alu\_8bit
+**Top module:** `alu_8bit`
 
 | Signal | Direction | Width | Description |
 | :---- | :---- | :---- | :---- |
+| clk | input | 1 | Clock signal |
+| reset | input | 1 | Asynchronous reset (active high) |
+| start | input | 1 | Start the selected operation |
 | A | input | 8 | First operand |
 | B | input | 8 | Second operand |
-| opcode | input | 3 | Operation select |
+| opcode | input | 4 | Operation select |
 | result | output | 8 | Selected result |
+| ready | output | 1 | Operation is complete, result is valid |
 | Z | output | 1 | Zero Flag: Set when result is exactly zero |
 | N | output | 1 | Negative Flag: Set when result\[7\] is one |
 | V | output | 1 | Overflow Flag: Set on signed arithmetic overflow |
@@ -46,14 +49,15 @@ The sequential execution units support:
 
 | opcode | Operation |
 | :---- | :---- |
-| 000 | Addition |
-| 001 | Subtraction |
-| 010 | Bitwise AND |
-| 011 | Bitwise OR |
-| 100 | Bitwise XOR |
-| 101 | Logical Shift Left (LSL) |
-| 110 | Logical Shift Right (LSR) |
-| 111 | Pass A (B is ignored) |
+| 0000 | Addition |
+| 0001 | Subtraction |
+| 0010 | Bitwise AND |
+| 0011 | Bitwise OR |
+| 0100 | Bitwise XOR |
+| 0101 | Logical Shift Left (LSL) |
+| 0110 | Logical Shift Right (LSR) |
+| 1000 | Multiplication (Signed) |
+| 1001 | Division (Signed/Unsigned) |
 
 ## **Project Structure**
 
@@ -68,7 +72,7 @@ Plaintext
 │   ├── logic\_ops/         \# Combinational bitwise gates and shifters  
 │   ├── gates.v            \# Base structural primitives with \#1ns delays  
 │   ├── shift\_register\_8bit.v \# Universal register for sequential algorithms  
-│   └── alu\_8bit.v         \# Top-level combinational ALU wrapper  
+│   └── alu\_8bit.v         \# Top-level sequential ALU controller  
 └── tb/  
     ├── tb\_adder.v         \# Adder verification  
     ├── tb\_alu.v           \# Self-checking ALU testbench  

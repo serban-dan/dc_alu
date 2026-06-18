@@ -46,7 +46,9 @@ module booth_datapath (
         .clk(clk), .rst_n(rst_n),
         .d_in(data_in), 
         .load_en(load_M), 
-        .shift_en(1'b0), .shift_dir(1'b0), .shift_in(1'b0),
+        .shift_en(1'b0),
+        .shift_dir(1'b0), 
+        .shift_in(1'b0),
         .q_out(M_out)
     );
 
