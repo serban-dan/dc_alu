@@ -60,8 +60,8 @@ module alu_8bit (
     alu_and_8bit u_and (.a(A), .b(B), .y(out_and));
     alu_or_8bit  u_or  (.a(A), .b(B), .y(out_or));
     alu_xor_8bit u_xor (.a(A), .b(B), .y(out_xor));
-    alu_lshift_8bit u_ls (.a(A), .y(out_lsl));
-    alu_rshift_8bit u_rs (.a(A), .y(out_lsr));
+    alu_lshift_8bit u_ls (.a(A), .b(B), .y(out_lsl));
+    alu_rshift_8bit u_rs (.a(A), .b(B), .y(out_lsr));
 
     // Instantiate Sequential Units
     wire is_mul_op = (opcode == OP_MUL);

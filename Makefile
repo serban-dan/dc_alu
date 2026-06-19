@@ -32,6 +32,12 @@ alu:
 	vvp build/sim_alu.vvp
 	#gtkwave build/alu_waves.vcd &
 
+comprehensive:
+	mkdir -p build
+	iverilog -o build/sim_alu.vvp $(VERILOG_SOURCES) tb/tb_alu2.v
+	vvp build/sim_alu.vvp
+	#gtkwave build/alu_waves.vcd &
+
 # --- CLEANUP ---
 clean:
 	rm -rf build/*
